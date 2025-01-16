@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavender Coats' Baby Shower</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f4f9;
+            color: #6b4f9f;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #e8d4f8;
+            border-bottom: 4px solid #6b4f9f;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+        }
+        .container {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .event-details {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .event-details h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .event-details p {
+            font-size: 1.2em;
+        }
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .rsvp-form label {
+            font-size: 1.1em;
+            margin: 10px 0 5px;
+        }
+        .rsvp-form input[type="text"], .rsvp-form input[type="number"], .rsvp-form input[type="email"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .rsvp-form button {
+            padding: 15px;
+            background-color: #6b4f9f;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .rsvp-form button:hover {
+            background-color: #8e6dbf;
+        }
+        #them{
+            width: 50%;
+            margin: auto;
+            border-radius: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Lavender Coats' Baby Shower</h1>
+    <p>Join us as we celebrate the upcoming arrival of our little bundle of joy!</p>
+</header>
+
+<div class="container">
+
+    <div class="event-details">
+        <img id="them" src="them.jpg" alt="Family" >
+        <h2>Event Details</h2>
+        <p><strong>Date:</strong> April 5th, 2025</p>
+        <p><strong>Time:</strong> 12:30 PM - 3:00 PM</p>
+        <p><strong>Location:</strong> 100 Williamsburg Pkwy, Fate, TX 75132</p>
+        <p><strong>Parents:</strong> Joseph & Emily</p>
+    </div>
+
+    <div class="rsvp-section">
+        <h2>RSVP</h2>
+        <p>Let us know if you’ll be joining us and how many people you’ll be bringing along!</p>
+        <form class="rsvp-form"  id="rsvpForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="attendees">How many guests will you be bringing?</label>
+            <input type="number" id="attendees" name="attendees" min="1" required>
+
+            <button type="submit">RSVP Now!</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    // Initialize EmailJS
+    (function () {
+        emailjs.init("coB0c1m05Tf4j2jKx");  // Replace with your EmailJS user ID
+    })();
+
+    // Handle form submission
+    document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const attendees = document.getElementById('attendees').value;
+
+        // Send the email
+        emailjs.send("service_n7g5q8m", "template_4nkjmir", {
+            name: name,
+            email: email,
+            attendees: attendees
+        })
+        .then(function (response) {
+            alert("RSVP submitted! We'll see you at the baby shower.");
+            // Optionally reset the form after submission
+            document.getElementById('rsvpForm').reset();
+        }, function (error) {
+            alert("Something went wrong. Please try again.");
+            console.error("EmailJS Error:", error);
+        });
+    });
+</script>
+</body>
+</html>
